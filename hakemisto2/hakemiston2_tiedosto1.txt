@@ -1,0 +1,4 @@
+3. Gitin alkeet
+Lisää ja committaa repositorioon kaksi tiedostoa ja kaksi hakemistoa, joiden sisällä on tiedostoja
+
+Tämä on tiedosto 2 hakemistossa 1
