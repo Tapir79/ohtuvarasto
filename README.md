@@ -3,6 +3,18 @@ HY tietojenkäsittelytiede, Ohjelmistotuotannon laskuharjoitukset
 
 ## Viikko1 tehtävät
 
+### Tehtävä 1 - Komentorivi
+
+[X] Tee tehtävät. 
+                 
+
+### Tehtävä 2 - GitHubiin
+
+[X] Luo GitHubiin repositorio nimellä ohtuvarasto            
+
+
+### Tehtävä 3 - Gitin alkeet [versionhallinta]
+
 [X] Lisää ja committaa repositorioon kaksi tiedostoa ja kaksi hakemistoa, joiden sisällä on tiedostoja              
 
 [X] Muuta ainakin kahden tiedoston sisältöä ja committaa muutokset repositorioon      
@@ -22,9 +34,13 @@ Peru muutos `restore README.md`-komennolla. Komento palauttaa tiedoston työtila
 [X] Tee muutos ja lisää tiedosto “staging”-alueelle, varmista että muutosta ei enää näy tiedostossa. Esimerkki README.md
 Peru muutos `restore --staged README.md` ja `restore README.md` -komennoilla. 1. komento palauttaa tiedoston staging-alueelta työtilaan. 2. Komento palauttaa tiedoston työtilasta (working directory) viimeisimpään committiin (tai repository HEAD) ja unohtaa siihen tehdyt muutokset. 
 
-[X] git add -p -harjoituksella lisätty yksittäisiä rivejä kahteen tiedostoon tiedosto1.txt ja tiedosto2.txt ja jätetty muutama rivi työtilaan (working directory). 
+[X] git add -p -harjoituksella lisätty yksittäisiä rivejä kahteen tiedostoon tiedosto1.txt ja tiedosto2.txt ja jätetty muutama rivi työtilaan (working directory).
 
-## Tehtävä 5 - Monta kloonia samasta repositoriosta
+### Tehtävä 4 -  Tiedostojen lisääminen GitHubiin 
+
+[X] Pushaa tehtävän 3 tiedostot Githubiin.             
+
+### Tehtävä 5 - Monta kloonia samasta repositoriosta
 
 [X] Kloonaa ohtuvarasto toiseen hakemistoon, joka ei ole Git-repositorio.
 ```` 
@@ -76,7 +92,7 @@ Fast-forward
  create mode 100644 tiedosto3.txt
   ````    
 
-## Tehtävä 6 - Repositorion siivous
+### Tehtävä 6 - Repositorion siivous
 
 [X] Poista tehtävän 5 harjoitusklooni `rm -rf ohtu-klooni`                   
 
@@ -99,3 +115,15 @@ drwxr-xr-x 8 saara saara 4096 Oct 27 18:05 .git
 drwxr-xr-x 3 saara saara 4096 Oct 27 18:09 src
 ````
 
+### Tehtävä 7 - Poetry  
+
+[X] Päivitä Python versioon 3.13       
+[X] Päivitä Poetry versioon 2.2.1          
+[X] Aseta Poetry käyttämään versiota 3.13 `poetry env use 3.13.0`  
+
+### TEhtävä 8 - Unittest
+
+[X] Asenna coverage ja lisää .coveragerc             
+[X] Luo htmlcov             
+[X] Lisää htmlcov ja .coverage .gitignoreen           
+[X] Luo testit, joilla haaraumakattavuus saavuttaa 100%
