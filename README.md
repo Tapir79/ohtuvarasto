@@ -55,3 +55,23 @@ Fast-forward
  2 files changed, 16 insertions(+), 1 deletion(-)
  create mode 100644 ohtukloonin_kautta.txt
  ```` 
+
+[X] Lisää alkuperäiseen klooniin joitain tiedostoja ja pushaa ne GitHubiin. Pullaa lisätyt uudet tiedostot tiedosto3.txt ja /hakemisto1/hakemisto1_tiedosto2_harj5.txt ohtuklooniin.      
+ ```` 
+/ohtuklooni$ git pull
+remote: Enumerating objects: 12, done.
+remote: Counting objects: 100% (12/12), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 9 (delta 4), reused 8 (delta 3), pack-reused 0 (from 0)
+Unpacking objects: 100% (9/9), 1.31 KiB | 43.00 KiB/s, done.
+From github.com:Tapir79/ohtuvarasto
+   b07ccad..d92c5ba  main       -> origin/main
+Updating b07ccad..d92c5ba
+Fast-forward
+ README.md                                 | 20 +++++++++++++++++++-
+ hakemisto1/hakemisto1_tiedosto2_harj5.txt |  3 +++
+ tiedosto3.txt                             |  3 +++
+ 3 files changed, 25 insertions(+), 1 deletion(-)
+ create mode 100644 hakemisto1/hakemisto1_tiedosto2_harj5.txt
+ create mode 100644 tiedosto3.txt
+  ```` 
