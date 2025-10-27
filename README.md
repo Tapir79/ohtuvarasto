@@ -121,7 +121,7 @@ drwxr-xr-x 3 saara saara 4096 Oct 27 18:09 src
 [X] Päivitä Poetry versioon 2.2.1          
 [X] Aseta Poetry käyttämään versiota 3.13 `poetry env use 3.13.0`  
 
-### TEhtävä 8 - Unittest
+### Tehtävä 8 - Unittest
 
 [X] Asenna coverage ja lisää .coveragerc             
 [X] Luo htmlcov             
