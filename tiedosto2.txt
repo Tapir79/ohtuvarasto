@@ -4,3 +4,6 @@ Lisää ja committaa repositorioon kaksi tiedostoa ja kaksi hakemistoa, joiden s
 Tämä on tiedosto 1
 
 Sisältöä on muutettu tällä lisätyllä rivillä.
+
+
+"git add -p" -harjoituksen testirivi 

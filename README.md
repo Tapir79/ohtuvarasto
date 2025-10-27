@@ -21,3 +21,5 @@ Peru muutos `restore README.md`-komennolla. Komento palauttaa tiedoston työtila
 
 [X] Tee muutos ja lisää tiedosto “staging”-alueelle, varmista että muutosta ei enää näy tiedostossa. Esimerkki README.md
 Peru muutos `restore --staged README.md` ja `restore README.md` -komennoilla. 1. komento palauttaa tiedoston staging-alueelta työtilaan. 2. Komento palauttaa tiedoston työtilasta (working directory) viimeisimpään committiin (tai repository HEAD) ja unohtaa siihen tehdyt muutokset. 
+
+[X] git add -p -harjoituksella lisätty yksittäisiä rivejä kahteen tiedostoon tiedosto1.txt ja tiedosto2.txt ja jätetty muutama rivi työtilaan (working directory). 
