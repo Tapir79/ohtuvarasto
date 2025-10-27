@@ -127,3 +127,7 @@ drwxr-xr-x 3 saara saara 4096 Oct 27 18:09 src
 [X] Luo htmlcov             
 [X] Lisää htmlcov ja .coverage .gitignoreen           
 [X] Luo testit, joilla haaraumakattavuus saavuttaa 100%
+
+Bonus: 
+
+[X] Alias .bashrc-tiedostoon `alias poetry-activate='eval $(poetry env activate)'`
