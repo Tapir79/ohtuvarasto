@@ -37,3 +37,21 @@ git add ohtukloonin_kautta.txt
 git commit -m "Add new file with cloned repo"
 git push
 ```` 
+
+[X] "Pullaa" kloonin kautta tehdyt muutokset alkuperäiseen ohtuvarasto-repoon. 
+```` 
+/ohtuvarasto$ git pull
+remote: Enumerating objects: 8, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 6 (delta 3), reused 6 (delta 3), pack-reused 0 (from 0)
+Unpacking objects: 100% (6/6), 835 bytes | 23.00 KiB/s, done.
+From github.com:Tapir79/ohtuvarasto
+   fcf32b1..b07ccad  main       -> origin/main
+Updating fcf32b1..b07ccad
+Fast-forward
+ README.md              | 16 +++++++++++++++-
+ ohtukloonin_kautta.txt |  1 +
+ 2 files changed, 16 insertions(+), 1 deletion(-)
+ create mode 100644 ohtukloonin_kautta.txt
+ ```` 
