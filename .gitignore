@@ -1,0 +1,7 @@
+# vain juurihakemiston (ohtuvarasto) tmp-tiedostot
+/*.tmp
+
+# kaikki __pycache__ - ja .pytest_cache -kansiot, 
+# myös alikansioiden alla olevat
+__pycache__/
+.pytest_cache/
