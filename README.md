@@ -85,3 +85,17 @@ Fast-forward
 /ohtuvarasto$ ls -a
 .  ..  .git  .gitignore  README.md
 ````
+
+[X] Hae ja pura varasto.zip sisältö projektin juureen.  
+````
+ ls -la
+total 28
+drwxr-xr-x 4 saara saara 4096 Oct 27 18:09 .
+drwxr-xr-x 5 saara saara 4096 Oct 27 18:08 ..
+drwxr-xr-x 8 saara saara 4096 Oct 27 18:05 .git
+-rw-r--r-- 1 saara saara  171 Oct 27 16:25 .gitignore
+-rw-r--r-- 1 saara saara 4087 Oct 27 18:05 README.md
+-rw-r--r-- 1 saara saara  400 Oct 27 18:09 pyproject.toml
+drwxr-xr-x 3 saara saara 4096 Oct 27 18:09 src
+````
+
