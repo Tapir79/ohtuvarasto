@@ -1,3 +1,0 @@
-Tehtävä 5. Monta kloonia samasta repositoriosta. 
-
-Tämä tiedosto on lisätty alkuperäisen kloonin (ohtuvarasto) kautta. 

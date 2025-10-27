@@ -74,4 +74,14 @@ Fast-forward
  3 files changed, 25 insertions(+), 1 deletion(-)
  create mode 100644 hakemisto1/hakemisto1_tiedosto2_harj5.txt
  create mode 100644 tiedosto3.txt
-  ```` 
+  ````    
+
+## Tehtävä 6 - Repositorion siivous
+
+[X] Poista tehtävän 5 harjoitusklooni `rm -rf ohtu-klooni`                   
+
+[X] Poista repositorioistasi kaikki hakemistot sekä muut tiedostot paitsi .git, .gitignore ja README.md
+```` 
+/ohtuvarasto$ ls -a
+.  ..  .git  .gitignore  README.md
+````
