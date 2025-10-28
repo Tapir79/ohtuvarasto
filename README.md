@@ -1,5 +1,5 @@
 # ohtuvarasto
-[![CI](https://github.com/Tapir79/ohtuvarasto/actions/workflows/main.yml/badge.svg)](https://github.com/Tapir79/ohtuvarasto/actions/workflows/main.yml)
+[![CI](https://github.com/Tapir79/ohtuvarasto/actions/workflows/main.yml/badge.svg)](https://github.com/Tapir79/ohtuvarasto/actions/)
 
 HY tietojenkäsittelytiede, Ohjelmistotuotannon laskuharjoitukset
 
@@ -138,4 +138,7 @@ Bonus:
 
 [X] Luo .github/workflows/main.yml
 [X] Hajota testit, jotta GHA menee punaiselle 
-[X] Korjaa rikkinäinen testi ja varmista, että CI toimii oikein. 
+[X] Korjaa rikkinäinen testi ja varmista, että CI toimii oikein.
+[X] Lisää CI badge
+[X] Muuta testitiedostoa > pull antaa virheen > pull.rebase > push
+[X] Tee badgestä linkki Actions-välilehdelle
