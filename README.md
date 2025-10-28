@@ -131,3 +131,9 @@ drwxr-xr-x 3 saara saara 4096 Oct 27 18:09 src
 Bonus: 
 
 [X] Alias .bashrc-tiedostoon `alias poetry-activate='eval $(poetry env activate)'`
+
+### Tehtävä 9 - GitHub Actions, osa 1
+
+[X] Luo .github/workflows/main.yml
+[X] Hajota testit, jotta GHA menee punaiselle 
+[X] Korjaa rikkinäinen testi ja varmista, että CI toimii oikein. 
