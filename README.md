@@ -148,7 +148,10 @@ Bonus:
  
  ### Tehtävä 12 - Codecov
 
- [X] Lisää repositorio Codecoviin alaisuuteen
- [X] Lisää Codecov token Githubiin
- [X] Lisää Codecov Github Action -konfiguraatioon
- [X] Lisää badge Codecoviin
+ [X] Lisää repositorio Codecoviin alaisuuteen             
+ [X] Lisää Codecov token Githubiin               
+ [X] Lisää Codecov Github Action -konfiguraatioon            
+ [X] Lisää badge Codecoviin               
+
+ ### Tehtävä 13 - Parempi testikattavuus
+ [X] Lisää juurihakemiston .coveragerc-tiedostoon, omit-konfiguraatio ja määrittele huomioimatta jätettävät tiedostot                   
