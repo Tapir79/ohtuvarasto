@@ -1,6 +1,9 @@
 # ohtuvarasto
 [![CI](https://github.com/Tapir79/ohtuvarasto/actions/workflows/main.yml/badge.svg)](https://github.com/Tapir79/ohtuvarasto/actions/)
 
+[![codecov](https://codecov.io/github/Tapir79/ohtuvarasto/graph/badge.svg?token=TYZUSTGBQD)](https://codecov.io/github/Tapir79/ohtuvarasto)
+
+
 HY tietojenkäsittelytiede, Ohjelmistotuotannon laskuharjoitukset
 
 ## Viikko1 tehtävät
@@ -134,11 +137,18 @@ Bonus:
 
 [X] Alias .bashrc-tiedostoon `alias poetry-activate='eval $(poetry env activate)'`
 
-### Tehtävä 9 - GitHub Actions, osa 1
+### Tehtävä 9,10,11 - GitHub Actions, osa 1,2,3
 
-[X] Luo .github/workflows/main.yml
-[X] Hajota testit, jotta GHA menee punaiselle 
-[X] Korjaa rikkinäinen testi ja varmista, että CI toimii oikein.
-[X] Lisää CI badge
-[X] Muuta testitiedostoa > pull antaa virheen > pull.rebase > push
-[X] Tee badgestä linkki Actions-välilehdelle
+[X] Luo .github/workflows/main.yml            
+[X] Hajota testit, jotta GHA menee punaiselle               
+[X] Korjaa rikkinäinen testi ja varmista, että CI toimii oikein.                
+[X] Lisää CI badge             
+[X] Muuta testitiedostoa > pull antaa virheen > pull.rebase > push           
+[X] Tee badgestä linkki Actions-välilehdelle            
+ 
+ ### Tehtävä 12 - Codecov
+
+ [X] Lisää repositorio Codecoviin alaisuuteen
+ [X] Lisää Codecov token Githubiin
+ [X] Lisää Codecov Github Action -konfiguraatioon
+ [X] Lisää badge Codecoviin
