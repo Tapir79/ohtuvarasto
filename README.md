@@ -1,4 +1,6 @@
 # ohtuvarasto
+[![CI](https://github.com/Tapir79/ohtuvarasto/actions/workflows/main.yml/badge.svg)](https://github.com/Tapir79/ohtuvarasto/actions/workflows/main.yml)
+
 HY tietojenkäsittelytiede, Ohjelmistotuotannon laskuharjoitukset
 
 ## Viikko1 tehtävät
