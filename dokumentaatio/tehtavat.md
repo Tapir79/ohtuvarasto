@@ -1,9 +1,4 @@
-HY tietojenkäsittelytiede, Ohjelmistotuotannon laskuharjoitukset 1-13
-
-## Tehtävä 1 - Komentorivi
-
-[X] Tee tehtävät. 
-                 
+HY tietojenkäsittelytiede, Ohjelmistotuotannon laskuharjoitukset 2-13
 
 ## Tehtävä 2 - GitHubiin
 
