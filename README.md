@@ -4,21 +4,19 @@
 [![codecov](https://codecov.io/github/Tapir79/ohtuvarasto/graph/badge.svg?token=TYZUSTGBQD)](https://codecov.io/github/Tapir79/ohtuvarasto)
 
 
-HY tietojenkäsittelytiede, Ohjelmistotuotannon laskuharjoitukset
+HY tietojenkäsittelytiede, Ohjelmistotuotannon laskuharjoitukset 1-13
 
-## Viikko1 tehtävät
-
-### Tehtävä 1 - Komentorivi
+## Tehtävä 1 - Komentorivi
 
 [X] Tee tehtävät. 
                  
 
-### Tehtävä 2 - GitHubiin
+## Tehtävä 2 - GitHubiin
 
 [X] Luo GitHubiin repositorio nimellä ohtuvarasto            
 
 
-### Tehtävä 3 - Gitin alkeet [versionhallinta]
+## Tehtävä 3 - Gitin alkeet [versionhallinta]
 
 [X] Lisää ja committaa repositorioon kaksi tiedostoa ja kaksi hakemistoa, joiden sisällä on tiedostoja              
 
@@ -41,11 +39,11 @@ Peru muutos `restore --staged README.md` ja `restore README.md` -komennoilla. 1.
 
 [X] git add -p -harjoituksella lisätty yksittäisiä rivejä kahteen tiedostoon tiedosto1.txt ja tiedosto2.txt ja jätetty muutama rivi työtilaan (working directory).
 
-### Tehtävä 4 -  Tiedostojen lisääminen GitHubiin 
+## Tehtävä 4 -  Tiedostojen lisääminen GitHubiin 
 
 [X] Pushaa tehtävän 3 tiedostot Githubiin.             
 
-### Tehtävä 5 - Monta kloonia samasta repositoriosta
+## Tehtävä 5 - Monta kloonia samasta repositoriosta
 
 [X] Kloonaa ohtuvarasto toiseen hakemistoon, joka ei ole Git-repositorio.
 ```` 
@@ -97,7 +95,7 @@ Fast-forward
  create mode 100644 tiedosto3.txt
   ````    
 
-### Tehtävä 6 - Repositorion siivous
+## Tehtävä 6 - Repositorion siivous
 
 [X] Poista tehtävän 5 harjoitusklooni `rm -rf ohtu-klooni`                   
 
@@ -120,13 +118,13 @@ drwxr-xr-x 8 saara saara 4096 Oct 27 18:05 .git
 drwxr-xr-x 3 saara saara 4096 Oct 27 18:09 src
 ````
 
-### Tehtävä 7 - Poetry  
+## Tehtävä 7 - Poetry  
 
 [X] Päivitä Python versioon 3.13       
 [X] Päivitä Poetry versioon 2.2.1          
 [X] Aseta Poetry käyttämään versiota 3.13 `poetry env use 3.13.0`  
 
-### Tehtävä 8 - Unittest
+## Tehtävä 8 - Unittest
 
 [X] Asenna coverage ja lisää .coveragerc             
 [X] Luo htmlcov             
@@ -137,7 +135,7 @@ Bonus:
 
 [X] Alias .bashrc-tiedostoon `alias poetry-activate='eval $(poetry env activate)'`
 
-### Tehtävä 9,10,11 - GitHub Actions, osa 1,2,3
+## Tehtävä 9,10,11 - GitHub Actions, osa 1,2,3
 
 [X] Luo .github/workflows/main.yml            
 [X] Hajota testit, jotta GHA menee punaiselle               
@@ -146,12 +144,12 @@ Bonus:
 [X] Muuta testitiedostoa > pull antaa virheen > pull.rebase > push           
 [X] Tee badgestä linkki Actions-välilehdelle            
  
- ### Tehtävä 12 - Codecov
+ ## Tehtävä 12 - Codecov
 
  [X] Lisää repositorio Codecoviin alaisuuteen             
  [X] Lisää Codecov token Githubiin               
  [X] Lisää Codecov Github Action -konfiguraatioon            
  [X] Lisää badge Codecoviin               
 
- ### Tehtävä 13 - Parempi testikattavuus
+ ## Tehtävä 13 - Parempi testikattavuus
  [X] Lisää juurihakemiston .coveragerc-tiedostoon, omit-konfiguraatio ja määrittele huomioimatta jätettävät tiedostot                   
