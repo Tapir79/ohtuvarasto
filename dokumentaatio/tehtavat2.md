@@ -26,4 +26,10 @@ src/index.py:4:0: R0915: Too many statements (42/10) (too-many-statements)
 
 ## Tehtävä 7
 
-- [X] Lisää Pylint-tarkastukset Github Actionsiin 
+- [X] Lisää Pylint-tarkastukset Github Actionsiin          
+
+## Tehtävä 8 - Precommit hook ja Pylint
+- [X] poetry add pre-commit --group dev      
+- [X] Lisää .pre-commit-config.yaml      
+- [X] pre-commit install            
+    
