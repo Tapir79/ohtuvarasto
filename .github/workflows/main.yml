@@ -20,7 +20,7 @@ jobs:
         run: poetry install
       - name: Run Pylint
         run: |
-          poetry run pylint src --exit-zero --output-format=colorized
+          poetry run pylint src --output-format=colorized
       - name: Run tests
         run: poetry run coverage run --branch -m pytest
       - name: Coverage report
