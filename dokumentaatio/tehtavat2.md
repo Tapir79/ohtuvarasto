@@ -6,3 +6,4 @@
 - [X] Lisää .pylitrc               
 - [X] Ota autopep8 käyttöön `poetry add autopep8 --group dev`                
 - [X] Aja pylint ja autopep8          
+- [X] Muuta koodia niin, että testit menevät läpi, mutta pylint-säännöt rikkoutuvat. 
