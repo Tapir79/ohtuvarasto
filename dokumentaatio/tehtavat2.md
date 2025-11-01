@@ -23,3 +23,7 @@ src/varasto.py:2:4: R0915: Too many statements (19/10) (too-many-statements)
 src/index.py:4:0: R0915: Too many statements (42/10) (too-many-statements)
 ````          
 - [X] Korjaa koodi niin, että se noudattaa kaikkia sääntöjä             
+
+## Tehtävä 7
+
+- [X] Lisää Pylint-tarkastukset Github Actionsiin 

@@ -79,6 +79,13 @@ def testaa_mehun_otto(mehua):
     saatiin = mehua.ota_varastosta(-32.9)
     print(f"saatiin {saatiin}")
     print(f"Mehuvarasto: {mehua}")
+    print("Pylintin säännön rikkomista varten lisätään ylimääräinen rivi")
+    print("Pylintin säännön rikkomista varten lisätään ylimääräinen rivi")
+    print("Pylintin säännön rikkomista varten lisätään ylimääräinen rivi")
+    print("Pylintin säännön rikkomista varten lisätään ylimääräinen rivi")
+    print("Pylintin säännön rikkomista varten lisätään ylimääräinen rivi")
+    print("Pylintin säännön rikkomista varten lisätään ylimääräinen rivi")
+    print("Pylintin säännön rikkomista varten lisätään ylimääräinen rivi")
 
 
 if __name__ == "__main__":
