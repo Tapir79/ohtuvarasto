@@ -3,7 +3,7 @@
 ## Tehtävä 6 - Pylint ja koodin staattinen analyysi
 
 - [X] Ota varasto-projektissa käyttöön Pylint `poetry add pylint --group dev`              
-- [X] Lisää .pylitrc               
+- [X] Lisää .pylintrc               
 - [X] Ota autopep8 käyttöön `poetry add autopep8 --group dev`                
 - [X] Aja pylint ja autopep8          
 - [X] Muuta koodia niin, että testit menevät läpi, mutta pylint-säännöt rikkoutuvat. Kaikki määritellyt säännöt + trailing-whitespace. 
@@ -32,4 +32,4 @@ src/index.py:4:0: R0915: Too many statements (42/10) (too-many-statements)
 - [X] poetry add pre-commit --group dev      
 - [X] Lisää .pre-commit-config.yaml      
 - [X] pre-commit install            
-    
+- [X] Testaa, että pre-commit havaitsee pylint-virheen     

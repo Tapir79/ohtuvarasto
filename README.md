@@ -6,4 +6,4 @@
 
 ## Tehtyjen tehtävien dokumentaatio
 * [Viikko 1 - Tehtävät 2 - 13](https://github.com/Tapir79/ohtuvarasto/tree/main/dokumentaatio/tehtavat1.md)
-* [Viikko 2 - Tehtävät 6 - 12](https://github.com/Tapir79/ohtuvarasto/tree/main/dokumentaatio/tehtavat2.md)
+* [Viikko 2 - Tehtävät 6 - 8](https://github.com/Tapir79/ohtuvarasto/tree/main/dokumentaatio/tehtavat2.md)
