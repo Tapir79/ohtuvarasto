@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit {{ warehouse.name }} - Warehouse Management{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <h1 class="mb-4">Edit Warehouse</h1>
+        
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('update_warehouse', warehouse_id=warehouse.id) }}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Warehouse Name *</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="name" 
+                               name="name" 
+                               value="{{ warehouse.name }}" 
+                               required 
+                               placeholder="e.g., Main Storage">
+                        <div class="form-text">Enter a descriptive name for the warehouse</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="tilavuus" class="form-label">Capacity (Tilavuus) *</label>
+                        <input type="number" 
+                               class="form-control" 
+                               id="tilavuus" 
+                               name="tilavuus" 
+                               value="{{ warehouse.varasto.tilavuus }}" 
+                               step="0.01" 
+                               min="0.01" 
+                               required 
+                               placeholder="e.g., 100">
+                        <div class="form-text">Maximum capacity of the warehouse (must be greater than 0)</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="saldo" class="form-label">Current Balance (Saldo) *</label>
+                        <input type="number" 
+                               class="form-control" 
+                               id="saldo" 
+                               name="saldo" 
+                               value="{{ warehouse.varasto.saldo }}" 
+                               step="0.01" 
+                               min="0" 
+                               required 
+                               placeholder="e.g., 50">
+                        <div class="form-text">Current inventory amount (cannot be negative)</div>
+                    </div>
+                    
+                    <div class="alert alert-warning" role="alert">
+                        <strong>Note:</strong> Changing the capacity or balance will recreate the warehouse instance. 
+                        Make sure the balance does not exceed the capacity.
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Update Warehouse</button>
+                        <a href="{{ url_for('warehouse_detail', warehouse_id=warehouse.id) }}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
