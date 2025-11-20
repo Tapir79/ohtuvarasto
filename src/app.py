@@ -1,9 +1,14 @@
 """Flask web application for managing warehouse instances."""
+import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 from warehouse_service import WarehouseService
 
 app = Flask(__name__)
-app.secret_key = 'dev-secret-key-change-in-production'  # For flash messages
+# Use environment variable for secret key, fallback to dev key
+app.secret_key = os.environ.get(
+    'FLASK_SECRET_KEY',
+    'dev-secret-key-change-in-production'
+)
 
 # Initialize the warehouse service
 warehouse_service = WarehouseService()
@@ -207,4 +212,7 @@ def delete_warehouse(warehouse_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Debug mode should only be enabled in development
+    # For production, use a production WSGI server like Gunicorn
+    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(debug=debug_mode)

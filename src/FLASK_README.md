@@ -37,6 +37,15 @@ cd src
 poetry run python app.py
 ```
 
+### Development Mode with Debug
+To enable debug mode (for development only):
+```bash
+cd src
+FLASK_DEBUG=true poetry run python app.py
+```
+
+**Note**: Debug mode should never be enabled in production as it can allow attackers to run arbitrary code.
+
 The application will be available at http://127.0.0.1:5000/
 
 ## Running Tests
