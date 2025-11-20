@@ -32,12 +32,12 @@ def new_warehouse():
 def create_warehouse():
     """POST /warehouses – create warehouse."""
     name = request.form.get('name', '').strip()
-    
+
     # Validate name
     if not name:
         flash('Warehouse name is required', 'error')
         return redirect(url_for('new_warehouse'))
-    
+
     # Get and validate capacity (tilavuus)
     try:
         tilavuus = float(request.form.get('tilavuus', 0))
@@ -47,7 +47,7 @@ def create_warehouse():
     except ValueError:
         flash('Invalid capacity value', 'error')
         return redirect(url_for('new_warehouse'))
-    
+
     # Get and validate initial balance (alku_saldo)
     try:
         alku_saldo = float(request.form.get('alku_saldo', 0))
@@ -57,9 +57,10 @@ def create_warehouse():
     except ValueError:
         flash('Invalid initial balance value', 'error')
         return redirect(url_for('new_warehouse'))
-    
+
     # Create the warehouse
-    warehouse_id = warehouse_service.create_warehouse(name, tilavuus, alku_saldo)
+    warehouse_id = warehouse_service.create_warehouse(
+        name, tilavuus, alku_saldo)
     flash(f'Warehouse "{name}" created successfully', 'success')
     return redirect(url_for('warehouse_detail', warehouse_id=warehouse_id))
 
@@ -71,7 +72,7 @@ def warehouse_detail(warehouse_id):
     if not warehouse:
         flash('Warehouse not found', 'error')
         return redirect(url_for('list_warehouses'))
-    
+
     return render_template('warehouse_detail.html', warehouse=warehouse)
 
 
@@ -82,17 +83,20 @@ def add_items(warehouse_id):
     if not warehouse:
         flash('Warehouse not found', 'error')
         return redirect(url_for('list_warehouses'))
-    
+
     # Get and validate amount
     try:
         amount = float(request.form.get('amount', 0))
         if amount <= 0:
             flash('Amount must be greater than 0', 'error')
-            return redirect(url_for('warehouse_detail', warehouse_id=warehouse_id))
+            return redirect(
+                url_for(
+                    'warehouse_detail',
+                    warehouse_id=warehouse_id))
     except ValueError:
         flash('Invalid amount value', 'error')
         return redirect(url_for('warehouse_detail', warehouse_id=warehouse_id))
-    
+
     # Add items
     warehouse_service.add_to_warehouse(warehouse_id, amount)
     flash(f'Added {amount} items to warehouse', 'success')
@@ -106,17 +110,20 @@ def remove_items(warehouse_id):
     if not warehouse:
         flash('Warehouse not found', 'error')
         return redirect(url_for('list_warehouses'))
-    
+
     # Get and validate amount
     try:
         amount = float(request.form.get('amount', 0))
         if amount <= 0:
             flash('Amount must be greater than 0', 'error')
-            return redirect(url_for('warehouse_detail', warehouse_id=warehouse_id))
+            return redirect(
+                url_for(
+                    'warehouse_detail',
+                    warehouse_id=warehouse_id))
     except ValueError:
         flash('Invalid amount value', 'error')
         return redirect(url_for('warehouse_detail', warehouse_id=warehouse_id))
-    
+
     # Remove items
     removed = warehouse_service.remove_from_warehouse(warehouse_id, amount)
     if removed is not None:
@@ -131,7 +138,7 @@ def edit_warehouse(warehouse_id):
     if not warehouse:
         flash('Warehouse not found', 'error')
         return redirect(url_for('list_warehouses'))
-    
+
     return render_template('edit_warehouse.html', warehouse=warehouse)
 
 
@@ -142,35 +149,45 @@ def update_warehouse(warehouse_id):
     if not warehouse:
         flash('Warehouse not found', 'error')
         return redirect(url_for('list_warehouses'))
-    
+
     # Get and validate name
     name = request.form.get('name', '').strip()
     if not name:
         flash('Warehouse name is required', 'error')
         return redirect(url_for('edit_warehouse', warehouse_id=warehouse_id))
-    
+
     # Get and validate capacity
     try:
         tilavuus = float(request.form.get('tilavuus', 0))
         if tilavuus <= 0:
             flash('Capacity must be greater than 0', 'error')
-            return redirect(url_for('edit_warehouse', warehouse_id=warehouse_id))
+            return redirect(
+                url_for(
+                    'edit_warehouse',
+                    warehouse_id=warehouse_id))
     except ValueError:
         flash('Invalid capacity value', 'error')
         return redirect(url_for('edit_warehouse', warehouse_id=warehouse_id))
-    
+
     # Get and validate balance
     try:
         saldo = float(request.form.get('saldo', 0))
         if saldo < 0:
             flash('Balance cannot be negative', 'error')
-            return redirect(url_for('edit_warehouse', warehouse_id=warehouse_id))
+            return redirect(
+                url_for(
+                    'edit_warehouse',
+                    warehouse_id=warehouse_id))
     except ValueError:
         flash('Invalid balance value', 'error')
         return redirect(url_for('edit_warehouse', warehouse_id=warehouse_id))
-    
+
     # Update warehouse
-    warehouse_service.update_warehouse(warehouse_id, name=name, tilavuus=tilavuus, saldo=saldo)
+    warehouse_service.update_warehouse(
+        warehouse_id,
+        name=name,
+        tilavuus=tilavuus,
+        saldo=saldo)
     flash(f'Warehouse "{name}" updated successfully', 'success')
     return redirect(url_for('warehouse_detail', warehouse_id=warehouse_id))
 
@@ -185,7 +202,7 @@ def delete_warehouse(warehouse_id):
         flash(f'Warehouse "{name}" deleted successfully', 'success')
     else:
         flash('Warehouse not found', 'error')
-    
+
     return redirect(url_for('list_warehouses'))
 
 
