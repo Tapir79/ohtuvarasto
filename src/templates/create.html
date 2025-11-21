@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Create Warehouse - Ohtuvarasto{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h1>Create New Warehouse</h1>
+        
+        <form method="POST" action="{{ url_for('create_warehouse') }}" onsubmit="return validateForm()">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name *</label>
+                <input type="text" class="form-control" id="name" name="name" 
+                       value="{{ name if name else '' }}" required>
+                <div class="invalid-feedback">Name is required</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="tilavuus" class="form-label">Capacity (tilavuus) *</label>
+                <input type="number" class="form-control" id="tilavuus" name="tilavuus" 
+                       step="0.01" min="0" value="{{ tilavuus if tilavuus else '' }}" required>
+                <div class="invalid-feedback">Capacity must be a non-negative number</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="saldo" class="form-label">Initial Balance (saldo)</label>
+                <input type="number" class="form-control" id="saldo" name="saldo" 
+                       step="0.01" min="0" value="{{ saldo if saldo else '0' }}">
+                <div class="invalid-feedback">Balance must be a non-negative number</div>
+            </div>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                <a href="{{ url_for('list_warehouses') }}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Create Warehouse</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function validateForm() {
+    let isValid = true;
+    const form = document.querySelector('form');
+    
+    // Get form elements
+    const name = document.getElementById('name');
+    const tilavuus = document.getElementById('tilavuus');
+    const saldo = document.getElementById('saldo');
+    
+    // Reset validation states
+    [name, tilavuus, saldo].forEach(el => {
+        el.classList.remove('is-invalid');
+    });
+    
+    // Validate name
+    if (!name.value.trim()) {
+        name.classList.add('is-invalid');
+        isValid = false;
+    }
+    
+    // Validate capacity
+    const tilavuusValue = parseFloat(tilavuus.value);
+    if (isNaN(tilavuusValue) || tilavuusValue < 0) {
+        tilavuus.classList.add('is-invalid');
+        isValid = false;
+    }
+    
+    // Validate balance
+    const saldoValue = parseFloat(saldo.value);
+    if (isNaN(saldoValue) || saldoValue < 0) {
+        saldo.classList.add('is-invalid');
+        isValid = false;
+    }
+    
+    return isValid;
+}
+
+// Add real-time validation
+document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const value = parseFloat(this.value);
+            if (!isNaN(value) && value >= 0) {
+                this.classList.remove('is-invalid');
+            }
+        });
+    });
+    
+    document.getElementById('name').addEventListener('input', function() {
+        if (this.value.trim()) {
+            this.classList.remove('is-invalid');
+        }
+    });
+});
+</script>
+{% endblock %}
