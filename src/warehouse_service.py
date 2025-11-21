@@ -58,9 +58,8 @@ class WarehouseService:
         Returns:
             List of dictionaries with warehouse data
         """
-        return [warehouse.to_dict()
-                for warehouse_id in sorted(self._warehouses.keys())
-                for warehouse in [self._warehouses[warehouse_id]]]
+        return [self._warehouses[warehouse_id].to_dict()
+                for warehouse_id in sorted(self._warehouses.keys())]
 
     def update_warehouse(self, warehouse_id, name=None, tilavuus=None,
                          saldo=None):

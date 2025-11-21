@@ -86,10 +86,16 @@ def edit_warehouse(warehouse_id):
         except ValidationError as e:
             for error in e.errors:
                 flash(error, 'error')
-            warehouse['name'] = name
-            warehouse['tilavuus'] = tilavuus_str
-            warehouse['saldo'] = saldo_str
-            return render_template('edit.html', warehouse=warehouse)
+            # Return form data for re-display (note: paljonko_mahtuu won't be
+            # available in error case)
+            form_data = {
+                'id': warehouse['id'],
+                'name': name,
+                'tilavuus': tilavuus_str,
+                'saldo': saldo_str,
+                'paljonko_mahtuu': 0  # Placeholder for error case
+            }
+            return render_template('edit.html', warehouse=form_data)
 
     return render_template('edit.html', warehouse=warehouse)
 
