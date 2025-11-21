@@ -1,9 +1,12 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 from warehouse_service import WarehouseService
+from validation import (ValidationError, validate_warehouse_creation,
+                        validate_warehouse_update, validate_amount)
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
+app.secret_key = os.environ.get(
+    'SECRET_KEY', 'dev-secret-key-change-in-production')
 
 # Create a global warehouse service instance
 warehouse_service = WarehouseService()
@@ -20,42 +23,26 @@ def list_warehouses():
 def create_warehouse():
     """Create a new warehouse."""
     if request.method == 'POST':
-        name = request.form.get('name', '').strip()
-        tilavuus_str = request.form.get('tilavuus', '').strip()
-        saldo_str = request.form.get('saldo', '0').strip()
-
-        # Validate inputs
-        errors = []
-
-        if not name:
-            errors.append('Name is required')
+        name = request.form.get('name', '')
+        tilavuus_str = request.form.get('tilavuus', '')
+        saldo_str = request.form.get('saldo', '0')
 
         try:
-            tilavuus = float(tilavuus_str)
-            if tilavuus < 0:
-                errors.append('Capacity must be non-negative')
-        except ValueError:
-            errors.append('Capacity must be a valid number')
-            tilavuus = 0
+            validated_name, tilavuus, saldo = validate_warehouse_creation(
+                name, tilavuus_str, saldo_str)
 
-        try:
-            saldo = float(saldo_str)
-            if saldo < 0:
-                errors.append('Balance must be non-negative')
-        except ValueError:
-            errors.append('Balance must be a valid number')
-            saldo = 0
+            warehouse_id = warehouse_service.create_warehouse(
+                validated_name, tilavuus, saldo)
+            flash(f'Warehouse "{validated_name}" created successfully!',
+                  'success')
+            return redirect(url_for('view_warehouse',
+                                    warehouse_id=warehouse_id))
 
-        if errors:
-            for error in errors:
+        except ValidationError as e:
+            for error in e.errors:
                 flash(error, 'error')
             return render_template('create.html', name=name,
                                    tilavuus=tilavuus_str, saldo=saldo_str)
-
-        warehouse_id = warehouse_service.create_warehouse(
-            name, tilavuus, saldo)
-        flash(f'Warehouse "{name}" created successfully!', 'success')
-        return redirect(url_for('view_warehouse', warehouse_id=warehouse_id))
 
     return render_template('create.html')
 
@@ -80,44 +67,29 @@ def edit_warehouse(warehouse_id):
         return redirect(url_for('list_warehouses'))
 
     if request.method == 'POST':
-        name = request.form.get('name', '').strip()
-        tilavuus_str = request.form.get('tilavuus', '').strip()
-        saldo_str = request.form.get('saldo', '').strip()
-
-        # Validate inputs
-        errors = []
-
-        if not name:
-            errors.append('Name is required')
+        name = request.form.get('name', '')
+        tilavuus_str = request.form.get('tilavuus', '')
+        saldo_str = request.form.get('saldo', '')
 
         try:
-            tilavuus = float(tilavuus_str)
-            if tilavuus < 0:
-                errors.append('Capacity must be non-negative')
-        except ValueError:
-            errors.append('Capacity must be a valid number')
-            tilavuus = warehouse['tilavuus']
+            validated_name, tilavuus, saldo = validate_warehouse_update(
+                name, tilavuus_str, saldo_str)
 
-        try:
-            saldo = float(saldo_str)
-            if saldo < 0:
-                errors.append('Balance must be non-negative')
-        except ValueError:
-            errors.append('Balance must be a valid number')
-            saldo = warehouse['saldo']
+            warehouse_service.update_warehouse(
+                warehouse_id, name=validated_name,
+                tilavuus=tilavuus, saldo=saldo)
+            flash(f'Warehouse "{validated_name}" updated successfully!',
+                  'success')
+            return redirect(url_for('view_warehouse',
+                                    warehouse_id=warehouse_id))
 
-        if errors:
-            for error in errors:
+        except ValidationError as e:
+            for error in e.errors:
                 flash(error, 'error')
             warehouse['name'] = name
-            warehouse['tilavuus'] = tilavuus
-            warehouse['saldo'] = saldo
+            warehouse['tilavuus'] = tilavuus_str
+            warehouse['saldo'] = saldo_str
             return render_template('edit.html', warehouse=warehouse)
-
-        warehouse_service.update_warehouse(warehouse_id, name=name,
-                                           tilavuus=tilavuus, saldo=saldo)
-        flash(f'Warehouse "{name}" updated successfully!', 'success')
-        return redirect(url_for('view_warehouse', warehouse_id=warehouse_id))
 
     return render_template('edit.html', warehouse=warehouse)
 
@@ -130,17 +102,15 @@ def add_items(warehouse_id):
         flash('Warehouse not found', 'error')
         return redirect(url_for('list_warehouses'))
 
-    maara_str = request.form.get('maara', '').strip()
+    maara_str = request.form.get('maara', '')
 
     try:
-        maara = float(maara_str)
-        if maara < 0:
-            flash('Amount must be non-negative', 'error')
-        else:
-            warehouse_service.add_to_warehouse(warehouse_id, maara)
-            flash(f'Added {maara} items to warehouse', 'success')
-    except ValueError:
-        flash('Amount must be a valid number', 'error')
+        maara = validate_amount(maara_str)
+        warehouse_service.add_to_warehouse(warehouse_id, maara)
+        flash(f'Added {maara} items to warehouse', 'success')
+    except ValidationError as e:
+        for error in e.errors:
+            flash(error, 'error')
 
     return redirect(url_for('view_warehouse', warehouse_id=warehouse_id))
 
@@ -153,18 +123,15 @@ def remove_items(warehouse_id):
         flash('Warehouse not found', 'error')
         return redirect(url_for('list_warehouses'))
 
-    maara_str = request.form.get('maara', '').strip()
+    maara_str = request.form.get('maara', '')
 
     try:
-        maara = float(maara_str)
-        if maara < 0:
-            flash('Amount must be non-negative', 'error')
-        else:
-            removed = warehouse_service.remove_from_warehouse(
-                warehouse_id, maara)
-            flash(f'Removed {removed} items from warehouse', 'success')
-    except ValueError:
-        flash('Amount must be a valid number', 'error')
+        maara = validate_amount(maara_str)
+        removed = warehouse_service.remove_from_warehouse(warehouse_id, maara)
+        flash(f'Removed {removed} items from warehouse', 'success')
+    except ValidationError as e:
+        for error in e.errors:
+            flash(error, 'error')
 
     return redirect(url_for('view_warehouse', warehouse_id=warehouse_id))
 
