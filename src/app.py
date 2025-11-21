@@ -1,8 +1,9 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 from warehouse_service import WarehouseService
 
 app = Flask(__name__)
-app.secret_key = 'dev-secret-key-change-in-production'
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
 # Create a global warehouse service instance
 warehouse_service = WarehouseService()
