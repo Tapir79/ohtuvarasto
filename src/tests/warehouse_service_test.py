@@ -1,6 +1,6 @@
 import unittest
 from warehouse_service import WarehouseService
-from warehouse import Warehouse
+from varasto import Varasto
 
 
 class TestWarehouseService(unittest.TestCase):
@@ -8,8 +8,8 @@ class TestWarehouseService(unittest.TestCase):
         self.service = WarehouseService()
 
     def test_create_warehouse(self):
-        warehouse = Warehouse("Test Warehouse", 100.0, 20.0)
-        warehouse_id = self.service.create_warehouse(warehouse)
+        varasto = Varasto(100.0, 20.0)
+        warehouse_id = self.service.create_warehouse("Test Warehouse", varasto)
         self.assertEqual(warehouse_id, 1)
 
         warehouse_data = self.service.get_warehouse(warehouse_id)
@@ -19,10 +19,10 @@ class TestWarehouseService(unittest.TestCase):
         self.assertAlmostEqual(warehouse_data['saldo'], 20.0)
 
     def test_create_multiple_warehouses(self):
-        warehouse1 = Warehouse("Warehouse 1", 100.0)
-        warehouse2 = Warehouse("Warehouse 2", 200.0)
-        id1 = self.service.create_warehouse(warehouse1)
-        id2 = self.service.create_warehouse(warehouse2)
+        varasto1 = Varasto(100.0)
+        varasto2 = Varasto(200.0)
+        id1 = self.service.create_warehouse("Warehouse 1", varasto1)
+        id2 = self.service.create_warehouse("Warehouse 2", varasto2)
 
         self.assertEqual(id1, 1)
         self.assertEqual(id2, 2)
@@ -36,8 +36,8 @@ class TestWarehouseService(unittest.TestCase):
         self.assertEqual(len(warehouses), 0)
 
     def test_list_warehouses(self):
-        self.service.create_warehouse(Warehouse("Warehouse 1", 100.0))
-        self.service.create_warehouse(Warehouse("Warehouse 2", 200.0))
+        self.service.create_warehouse("Warehouse 1", Varasto(100.0))
+        self.service.create_warehouse("Warehouse 2", Varasto(200.0))
 
         warehouses = self.service.list_warehouses()
         self.assertEqual(len(warehouses), 2)
@@ -45,8 +45,8 @@ class TestWarehouseService(unittest.TestCase):
         self.assertEqual(warehouses[1]['name'], "Warehouse 2")
 
     def test_update_warehouse_name(self):
-        warehouse = Warehouse("Old Name", 100.0)
-        warehouse_id = self.service.create_warehouse(warehouse)
+        varasto = Varasto(100.0)
+        warehouse_id = self.service.create_warehouse("Old Name", varasto)
         result = self.service.update_warehouse(warehouse_id, name="New Name")
 
         self.assertTrue(result)
@@ -54,8 +54,8 @@ class TestWarehouseService(unittest.TestCase):
         self.assertEqual(warehouse_data['name'], "New Name")
 
     def test_update_warehouse_capacity(self):
-        warehouse = Warehouse("Test", 100.0, 50.0)
-        warehouse_id = self.service.create_warehouse(warehouse)
+        varasto = Varasto(100.0, 50.0)
+        warehouse_id = self.service.create_warehouse("Test", varasto)
         result = self.service.update_warehouse(warehouse_id, tilavuus=200.0)
 
         self.assertTrue(result)
@@ -64,8 +64,8 @@ class TestWarehouseService(unittest.TestCase):
         self.assertAlmostEqual(warehouse_data['saldo'], 50.0)
 
     def test_update_warehouse_balance(self):
-        warehouse = Warehouse("Test", 100.0, 50.0)
-        warehouse_id = self.service.create_warehouse(warehouse)
+        varasto = Varasto(100.0, 50.0)
+        warehouse_id = self.service.create_warehouse("Test", varasto)
         result = self.service.update_warehouse(warehouse_id, saldo=30.0)
 
         self.assertTrue(result)
@@ -77,8 +77,8 @@ class TestWarehouseService(unittest.TestCase):
         self.assertFalse(result)
 
     def test_add_to_warehouse(self):
-        warehouse = Warehouse("Test", 100.0, 20.0)
-        warehouse_id = self.service.create_warehouse(warehouse)
+        varasto = Varasto(100.0, 20.0)
+        warehouse_id = self.service.create_warehouse("Test", varasto)
         result = self.service.add_to_warehouse(warehouse_id, 30.0)
 
         self.assertTrue(result)
@@ -90,16 +90,16 @@ class TestWarehouseService(unittest.TestCase):
         self.assertFalse(result)
 
     def test_add_negative_amount(self):
-        warehouse = Warehouse("Test", 100.0, 20.0)
-        warehouse_id = self.service.create_warehouse(warehouse)
+        varasto = Varasto(100.0, 20.0)
+        warehouse_id = self.service.create_warehouse("Test", varasto)
         self.service.add_to_warehouse(warehouse_id, -10.0)
 
         warehouse_data = self.service.get_warehouse(warehouse_id)
         self.assertAlmostEqual(warehouse_data['saldo'], 20.0)
 
     def test_remove_from_warehouse(self):
-        warehouse = Warehouse("Test", 100.0, 50.0)
-        warehouse_id = self.service.create_warehouse(warehouse)
+        varasto = Varasto(100.0, 50.0)
+        warehouse_id = self.service.create_warehouse("Test", varasto)
         removed = self.service.remove_from_warehouse(warehouse_id, 20.0)
 
         self.assertAlmostEqual(removed, 20.0)
@@ -111,8 +111,8 @@ class TestWarehouseService(unittest.TestCase):
         self.assertIsNone(removed)
 
     def test_remove_more_than_available(self):
-        warehouse = Warehouse("Test", 100.0, 50.0)
-        warehouse_id = self.service.create_warehouse(warehouse)
+        varasto = Varasto(100.0, 50.0)
+        warehouse_id = self.service.create_warehouse("Test", varasto)
         removed = self.service.remove_from_warehouse(warehouse_id, 80.0)
 
         self.assertAlmostEqual(removed, 50.0)
@@ -120,8 +120,8 @@ class TestWarehouseService(unittest.TestCase):
         self.assertAlmostEqual(warehouse_data['saldo'], 0.0)
 
     def test_delete_warehouse(self):
-        warehouse = Warehouse("Test", 100.0)
-        warehouse_id = self.service.create_warehouse(warehouse)
+        varasto = Varasto(100.0)
+        warehouse_id = self.service.create_warehouse("Test", varasto)
         result = self.service.delete_warehouse(warehouse_id)
 
         self.assertTrue(result)
@@ -133,8 +133,8 @@ class TestWarehouseService(unittest.TestCase):
         self.assertFalse(result)
 
     def test_warehouse_paljonko_mahtuu(self):
-        warehouse = Warehouse("Test", 100.0, 30.0)
-        warehouse_id = self.service.create_warehouse(warehouse)
+        varasto = Varasto(100.0, 30.0)
+        warehouse_id = self.service.create_warehouse("Test", varasto)
         warehouse_data = self.service.get_warehouse(warehouse_id)
 
         self.assertAlmostEqual(warehouse_data['paljonko_mahtuu'], 70.0)

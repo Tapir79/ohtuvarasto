@@ -1,3 +1,6 @@
+from varasto import Varasto
+
+
 class WarehouseService:
     """Service class to manage multiple warehouses."""
 
@@ -5,11 +8,12 @@ class WarehouseService:
         self._warehouses = {}
         self._next_id = 1
 
-    def create_warehouse(self, warehouse):
+    def create_warehouse(self, name, varasto):
         """Add a warehouse to the service.
 
         Args:
-            warehouse: Warehouse object to add
+            name: Name of the warehouse
+            varasto: Varasto object to add
 
         Returns:
             The ID of the created warehouse
@@ -17,8 +21,11 @@ class WarehouseService:
         warehouse_id = self._next_id
         self._next_id += 1
 
-        warehouse.id = warehouse_id
-        self._warehouses[warehouse_id] = warehouse
+        self._warehouses[warehouse_id] = {
+            'id': warehouse_id,
+            'name': name,
+            'varasto': varasto
+        }
 
         return warehouse_id
 
@@ -34,16 +41,25 @@ class WarehouseService:
         if warehouse_id not in self._warehouses:
             return None
 
-        return self._warehouses[warehouse_id].to_dict()
+        warehouse_data = self._warehouses[warehouse_id]
+        varasto = warehouse_data['varasto']
+
+        return {
+            'id': warehouse_data['id'],
+            'name': warehouse_data['name'],
+            'tilavuus': varasto.tilavuus,
+            'saldo': varasto.saldo,
+            'paljonko_mahtuu': varasto.paljonko_mahtuu()
+        }
 
     def get_warehouse_object(self, warehouse_id):
-        """Get a warehouse object by ID.
+        """Get warehouse data by ID.
 
         Args:
             warehouse_id: ID of the warehouse
 
         Returns:
-            Warehouse object or None if not found
+            Dictionary with warehouse data or None if not found
         """
         return self._warehouses.get(warehouse_id)
 
@@ -53,7 +69,7 @@ class WarehouseService:
         Returns:
             List of dictionaries with warehouse data
         """
-        return [self._warehouses[warehouse_id].to_dict()
+        return [self.get_warehouse(warehouse_id)
                 for warehouse_id in sorted(self._warehouses.keys())]
 
     def update_warehouse(self, warehouse_id, name=None, tilavuus=None,
@@ -69,11 +85,21 @@ class WarehouseService:
         Returns:
             True if successful, False if warehouse not found
         """
-        warehouse = self.get_warehouse_object(warehouse_id)
-        if warehouse is None:
+        warehouse_data = self.get_warehouse_object(warehouse_id)
+        if warehouse_data is None:
             return False
 
-        warehouse.update(name=name, tilavuus=tilavuus, saldo=saldo)
+        if name is not None:
+            warehouse_data['name'] = name
+
+        if tilavuus is not None or saldo is not None:
+            current_varasto = warehouse_data['varasto']
+            new_tilavuus = (tilavuus if tilavuus is not None
+                            else current_varasto.tilavuus)
+            new_saldo = (saldo if saldo is not None
+                         else current_varasto.saldo)
+            warehouse_data['varasto'] = Varasto(new_tilavuus, new_saldo)
+
         return True
 
     def add_to_warehouse(self, warehouse_id, maara):
@@ -86,11 +112,11 @@ class WarehouseService:
         Returns:
             True if successful, False if warehouse not found
         """
-        warehouse = self.get_warehouse_object(warehouse_id)
-        if warehouse is None:
+        warehouse_data = self.get_warehouse_object(warehouse_id)
+        if warehouse_data is None:
             return False
 
-        warehouse.add_items(maara)
+        warehouse_data['varasto'].lisaa_varastoon(maara)
         return True
 
     def remove_from_warehouse(self, warehouse_id, maara):
@@ -103,11 +129,11 @@ class WarehouseService:
         Returns:
             The actual amount removed, or None if warehouse not found
         """
-        warehouse = self.get_warehouse_object(warehouse_id)
-        if warehouse is None:
+        warehouse_data = self.get_warehouse_object(warehouse_id)
+        if warehouse_data is None:
             return None
 
-        return warehouse.remove_items(maara)
+        return warehouse_data['varasto'].ota_varastosta(maara)
 
     def delete_warehouse(self, warehouse_id):
         """Delete a warehouse.
