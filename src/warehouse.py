@@ -4,14 +4,14 @@ from varasto import Varasto
 class Warehouse:
     """Domain class representing a warehouse with a unique ID and name."""
 
-    def __init__(self, warehouse_id, name, tilavuus, saldo=0):
+    def __init__(self, name, tilavuus, saldo=0, warehouse_id=None):
         """Initialize a warehouse.
 
         Args:
-            warehouse_id: Unique identifier for the warehouse
             name: Name of the warehouse
             tilavuus: Capacity of the warehouse
             saldo: Initial balance (default 0)
+            warehouse_id: Unique identifier (optional, will be set by service)
         """
         self.id = warehouse_id
         self.name = name

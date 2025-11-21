@@ -1,6 +1,3 @@
-from warehouse import Warehouse
-
-
 class WarehouseService:
     """Service class to manage multiple warehouses."""
 
@@ -8,13 +5,11 @@ class WarehouseService:
         self._warehouses = {}
         self._next_id = 1
 
-    def create_warehouse(self, name, tilavuus, saldo=0):
-        """Create a new warehouse with given name, capacity and initial balance.
+    def create_warehouse(self, warehouse):
+        """Add a warehouse to the service.
 
         Args:
-            name: Name of the warehouse
-            tilavuus: Capacity of the warehouse
-            saldo: Initial balance (default 0)
+            warehouse: Warehouse object to add
 
         Returns:
             The ID of the created warehouse
@@ -22,7 +17,7 @@ class WarehouseService:
         warehouse_id = self._next_id
         self._next_id += 1
 
-        warehouse = Warehouse(warehouse_id, name, tilavuus, saldo)
+        warehouse.id = warehouse_id
         self._warehouses[warehouse_id] = warehouse
 
         return warehouse_id

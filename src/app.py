@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 from warehouse_service import WarehouseService
+from warehouse import Warehouse
 from validation import (ValidationError, validate_warehouse_creation,
                         validate_warehouse_update, validate_amount)
 
@@ -31,8 +32,8 @@ def create_warehouse():
             validated_name, tilavuus, saldo = validate_warehouse_creation(
                 name, tilavuus_str, saldo_str)
 
-            warehouse_id = warehouse_service.create_warehouse(
-                validated_name, tilavuus, saldo)
+            warehouse = Warehouse(validated_name, tilavuus, saldo)
+            warehouse_id = warehouse_service.create_warehouse(warehouse)
             flash(f'Warehouse "{validated_name}" created successfully!',
                   'success')
             return redirect(url_for('view_warehouse',
