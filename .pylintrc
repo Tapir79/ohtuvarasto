@@ -15,7 +15,9 @@ disable=raw-checker-failed,
         use-symbolic-message-instead,
         missing-module-docstring,
         missing-function-docstring,
-        missing-class-docstring
+        missing-class-docstring,
+        too-many-nested-blocks,
+        too-many-statements
 
 [FORMAT]
 max-line-length=80

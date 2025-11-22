@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Edit {{ warehouse.name }} - Ohtuvarasto{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h1>Edit Warehouse</h1>
+        
+        <form method="POST" action="{{ url_for('edit_warehouse', warehouse_id=warehouse.id) }}" 
+              onsubmit="return validateForm()">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name *</label>
+                <input type="text" class="form-control" id="name" name="name" 
+                       value="{{ warehouse.name }}" required>
+                <div class="invalid-feedback">Name is required</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="tilavuus" class="form-label">Capacity (tilavuus) *</label>
+                <input type="number" class="form-control" id="tilavuus" name="tilavuus" 
+                       step="0.01" min="0" value="{{ warehouse.tilavuus }}" required>
+                <div class="invalid-feedback">Capacity must be a non-negative number</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="saldo" class="form-label">Balance (saldo) *</label>
+                <input type="number" class="form-control" id="saldo" name="saldo" 
+                       step="0.01" min="0" value="{{ warehouse.saldo }}" required>
+                <div class="invalid-feedback">Balance must be a non-negative number</div>
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>Note:</strong> Changing the capacity or balance will recreate the warehouse 
+                with new values. Current available space: {{ "%.2f"|format(warehouse.paljonko_mahtuu) }}
+            </div>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                <a href="{{ url_for('view_warehouse', warehouse_id=warehouse.id) }}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Update Warehouse</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function validateForm() {
+    let isValid = true;
+    const form = document.querySelector('form');
+    
+    // Get form elements
+    const name = document.getElementById('name');
+    const tilavuus = document.getElementById('tilavuus');
+    const saldo = document.getElementById('saldo');
+    
+    // Reset validation states
+    [name, tilavuus, saldo].forEach(el => {
+        el.classList.remove('is-invalid');
+    });
+    
+    // Validate name
+    if (!name.value.trim()) {
+        name.classList.add('is-invalid');
+        isValid = false;
+    }
+    
+    // Validate capacity
+    const tilavuusValue = parseFloat(tilavuus.value);
+    if (isNaN(tilavuusValue) || tilavuusValue < 0) {
+        tilavuus.classList.add('is-invalid');
+        isValid = false;
+    }
+    
+    // Validate balance
+    const saldoValue = parseFloat(saldo.value);
+    if (isNaN(saldoValue) || saldoValue < 0) {
+        saldo.classList.add('is-invalid');
+        isValid = false;
+    }
+    
+    return isValid;
+}
+
+// Add real-time validation
+document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const value = parseFloat(this.value);
+            if (!isNaN(value) && value >= 0) {
+                this.classList.remove('is-invalid');
+            }
+        });
+    });
+    
+    document.getElementById('name').addEventListener('input', function() {
+        if (this.value.trim()) {
+            this.classList.remove('is-invalid');
+        }
+    });
+});
+</script>
+{% endblock %}
